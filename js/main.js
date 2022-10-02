@@ -13,9 +13,9 @@ function getRandomInteger(firstNumber, secondNumber) {
     firstNumber = Math.ceil(firstNumber);
     secondNumber = Math.floor(secondNumber);
     return Math.floor(Math.random() * (secondNumber - firstNumber + 1)) + firstNumber;
-  };
+  }
   return NaN;
-};
+}
 
 getRandomInteger(7, 25);
 
@@ -30,9 +30,9 @@ const errMsg = 'Слишком короткий комментарий!';
 function checkLength(string) {
   if (string.length < MIN_LENGTH) {
     throw Error(errMsg);
-  };
+  }
   return (string.length > MAX_LENGTH) ?
     string.slice(0, MAX_LENGTH - 1) + '…' : string;
-};
+}
 
 checkLength(103);
