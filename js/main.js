@@ -25,8 +25,9 @@ getRandomInteger(7, 25);
 
 const MIN_LENGTH = 20;
 const MAX_LENGTH = 140;
+const errMsg = 'Слишком короткий комментарий!';
 
-function checkLength(string, MAX_LENGTH, MIN_LENGTH) {
+function checkLength(string) {
   if (string.length < MIN_LENGTH) {
     throw Error(errMsg);
   };
@@ -34,4 +35,4 @@ function checkLength(string, MAX_LENGTH, MIN_LENGTH) {
     string.slice(0, MAX_LENGTH - 1) + '…' : string;
 };
 
-checkLength(103, MAX_LENGTH, MIN_LENGTH);
+checkLength(103);
