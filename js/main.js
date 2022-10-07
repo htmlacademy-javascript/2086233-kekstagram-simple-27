@@ -2,12 +2,14 @@
 (с использованием ресурса - https://learn.javascript.ru/task/random-int-min-max)*/
 
 function getRandomInteger(firstNumber, secondNumber) {
-  if (firstNumber >= 0 && secondNumber >= 0 && firstNumber <= secondNumber) {
+  if (firstNumber < 0 || secondNumber < 0) {
+    return NaN; }
+  else if (firstNumber <= secondNumber) {
     firstNumber = Math.ceil(firstNumber);
     secondNumber = Math.floor(secondNumber);
     return Math.floor(Math.random() * (secondNumber - firstNumber + 1)) + firstNumber;
   } else if (firstNumber > secondNumber) {
-    let swap = firstNumber;
+    const swap = firstNumber;
     firstNumber = secondNumber;
     secondNumber = swap;
     firstNumber = Math.ceil(firstNumber);
@@ -35,4 +37,4 @@ function checkLength(string) {
     string.slice(0, MAX_LENGTH - 1) + '…' : string;
 }
 
-checkLength(103);
+checkLength();
