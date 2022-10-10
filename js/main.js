@@ -19,6 +19,7 @@ getRandomInteger(7, 25);
 /* Функция для проверки максимальной длины строки.
 (с использованием ресурса - https://learn.javascript.ru/task/truncate)*/
 
+
 const MIN_LENGTH = 20;
 const MAX_LENGTH = 140;
 const errMsg = 'Слишком короткий комментарий!';
