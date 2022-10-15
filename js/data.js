@@ -37,7 +37,6 @@ const DESCRIPTIONS = [
 const POSTS_COUNT = 25;
 
 const createPost = (index) => ({
-  for (let i = 1; i <= POSTS_COUNT; i++) {index = i}
   id: index,
   url: `photos/${index}.jpg`,
   description: DESCRIPTIONS[getRandomInteger(0, DESCRIPTIONS.length - 1)],

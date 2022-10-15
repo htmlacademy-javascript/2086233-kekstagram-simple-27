@@ -30,5 +30,3 @@ function checkLength(string) {
     `${string.slice(0, MAX_LENGTH - 1)}…` : string;
 }
 
-checkLength();
-getRandomInteger(7, 25);
