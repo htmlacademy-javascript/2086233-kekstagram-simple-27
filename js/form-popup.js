@@ -1,6 +1,7 @@
 import {isEscapeKey} from './utils';
 
 const imgUpload = document.querySelector('#upload-file');
+const uploadSelectImage = document.querySelector('#upload-select-image');
 const uploadCancel = document.querySelector('#upload-cancel');
 const imgUploadOverlay = document.querySelector('.img-upload__overlay');
 
@@ -23,9 +24,6 @@ function openEditPhoto () {
       closeEditPhoto()
 });
 }
-
-/*Не нужно ли еще повесить (и не удалять) обработчик на поле выбора
-изображения для загрузки '#upload-select-image'?*/
 
 function closeEditPhoto () {
   imgUploadOverlay.classList.add('hidden');
