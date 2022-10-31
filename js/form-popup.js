@@ -1,7 +1,6 @@
-import {isEscapeKey} from './utils';
+import {isEscapeKey} from './utils.js';
 
 const imgUpload = document.querySelector('#upload-file');
-const uploadSelectImage = document.querySelector('#upload-select-image');
 const uploadCancel = document.querySelector('#upload-cancel');
 const imgUploadOverlay = document.querySelector('.img-upload__overlay');
 
