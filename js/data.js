@@ -35,7 +35,6 @@ const DESCRIPTIONS = [
   'Sweet home',
 ];
 const POSTS_COUNT = 25;
-export {POSTS_COUNT};
 
 const createPost = (index) => ({
   id: index,
@@ -48,4 +47,5 @@ const createPost = (index) => ({
 console.log(createPost());
 
 const postsContent = Array.from({length: POSTS_COUNT}, (obj, index) => createPost(index + 1));
-export {postsContent};
+
+export {postsContent, POSTS_COUNT};

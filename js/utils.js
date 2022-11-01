@@ -1,4 +1,3 @@
-export {getRandomInteger, checkLength};
 /* Функция, возвр-я случайное целое число из переданного диапазона
 (с использованием ресурса - https://learn.javascript.ru/task/random-int-min-max)*/
 
@@ -30,3 +29,8 @@ function checkLength(string) {
     `${string.slice(0, MAX_LENGTH - 1)}…` : string;
 }
 
+//Функции проверки клавиатуры
+const isEscapeKey = (evt) => evt.key === 'Escape';
+
+
+export {getRandomInteger, checkLength, isEscapeKey};
