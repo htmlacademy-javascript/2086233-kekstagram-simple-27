@@ -13,7 +13,7 @@ const onPopupEscKeydown = (evt) => {
   }
 };
 
-imgUpload.addEventListener('change', (evt) => {
+imgUpload.addEventListener('change', () => {
   openEditPhoto();
 });
 
@@ -21,7 +21,7 @@ function openEditPhoto () {
   imgUploadOverlay.classList.remove('hidden');
   document.body.classList.add('modal-open');
   document.addEventListener('keydown', onPopupEscKeydown);
-  uploadCancel.addEventListener('click', (evt) => {
+  uploadCancel.addEventListener('click', () => {
     closeEditPhoto();
   });
 }
@@ -33,7 +33,7 @@ function closeEditPhoto () {
   document.body.classList.remove('modal-open');
   imgUpload.value = '';
   document.removeEventListener('keydown', onPopupEscKeydown);
-  uploadCancel.removeEventListener('click', (evt) => {
+  uploadCancel.removeEventListener('click', () => {
     closeEditPhoto();
   });
 }

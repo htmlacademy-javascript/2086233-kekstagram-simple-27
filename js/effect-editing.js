@@ -1,6 +1,6 @@
 import {imgUploadPreview} from './scale-editing.js';
 
-const uploadEffectLevel = document.querySelector('.img-upload__effect-level');
+const imgUploadForm = document.querySelector('.img-upload__form');
 const effectLevelValue = document.querySelector('.effect-level__value');
 const effectLevelSlider = document.querySelector('.effect-level__slider');
 
@@ -74,7 +74,7 @@ const updateSlider = () => {
 };
 
 const onPreviewChange = (evt) => {
-  if (!evt.target.classList.contains('.effects__radio')) {
+  if (!evt.target.classList.contains('effects__radio')) {
     return;
   }
   chosenEffect = EFFECTS.find((effect) => effect.name === evt.target.value);
@@ -99,13 +99,13 @@ const onSliderUpdate = () => {
   if (isDefault()) {
     return;
   }
-  const sliderValue = effectLevelSlider.noUislider.get();
+  const sliderValue = effectLevelSlider.noUiSlider.get();
   imgUploadPreview.style.filter = `${chosenEffect.style}(${sliderValue}${chosenEffect.unit})`;
   imgUploadPreview.classList.add(`effects__preview--${chosenEffect.name}`);
   effectLevelValue.value = sliderValue;
 };
 
-uploadEffectLevel.addEventListener('change', onPreviewChange);
+imgUploadForm.addEventListener('change', onPreviewChange);
 effectLevelSlider.noUiSlider.on('update', onSliderUpdate);
 
 const resetEffect = () => {
