@@ -1,5 +1,4 @@
-/* Функция, возвр-я случайное целое число из переданного диапазона
-(с использованием ресурса - https://learn.javascript.ru/task/random-int-min-max)*/
+import {onPopupEscKeydown} from './form-popup.js';
 
 function getRandomInteger(firstNumber, secondNumber) {
   if (firstNumber < 0 || secondNumber < 0) {
@@ -33,4 +32,40 @@ function checkLength(string) {
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
 
-export {getRandomInteger, checkLength, isEscapeKey};
+const ALERT_SHOW_TIME = 5000;
+const showAlert = () => {
+  const alertContainer = document.querySelector('.error__inner');
+  const templateFragment = document.querySelector('#error').content;
+  const template = templateFragment.querySelector('.error');
+  const fragment = document.createDocumentFragment();
+  const errorPost = template.cloneNode(true);
+  errorPost.classList.add('error');
+  fragment.appendChild(errorPost);
+  alertContainer.appendChild(fragment);
+
+  setTimeout(() => {
+    alertContainer.remove();
+  }, ALERT_SHOW_TIME);
+};
+
+const showSuccess = () => {
+  const successButton = document.querySelector('.success__button');
+  const successMessageContainer = document.querySelector('.success__inner');
+  const templateFragment = document.querySelector('#success').content;
+  const template = templateFragment.querySelector('.success');
+  const fragment = document.createDocumentFragment();
+  const successPost = template.cloneNode(true);
+  successPost.classList.add('success');
+  fragment.appendChild(successPost);
+  successMessageContainer.appendChild(fragment);
+  const closeSuccessMessage = () => {
+    successMessageContainer.removeChild(fragment);
+    document.removeEventListener('keydown', onPopupEscKeydown);
+  };
+  successButton.addEventListener('click', () => {
+    closeSuccessMessage();
+  });
+  document.addEventListener('keydown', onPopupEscKeydown);
+};
+
+export {getRandomInteger, checkLength, isEscapeKey, showAlert, showSuccess};

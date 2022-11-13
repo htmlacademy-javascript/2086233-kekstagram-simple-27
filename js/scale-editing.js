@@ -8,7 +8,7 @@ const MAXSCALE = 100;
 const DEFAULT_SCALE = 100;
 
 const scaleImageEdit = (sizePercent = DEFAULT_SCALE) => {
-  imgUploadPreview.style.transform = 'scale(sizePercent / 100)';
+  imgUploadPreview.style.transform = 'scale(${sizePercent / 100})';
   scaleValue.value = sizePercent;
 };
 
