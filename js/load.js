@@ -1,7 +1,6 @@
 import {POSTS_COUNT} from './data.js';
-import {showSuccess} from './utils.js';
 
-const getData = (onSuccess, onError) => () => fetch('https://27.javascript.pages.academy/kekstagram-simple/data')
+const getData = (onSuccess, onError) => fetch('https://27.javascript.pages.academy/kekstagram-simple/data')
   .then((response) => {
     if (response.ok) {
       return response.json();}
@@ -24,7 +23,6 @@ const sendData = (onSuccess, onFail, body) => {
   ).then((response) => {
     if (response.ok) {
       onSuccess();
-      showSuccess();
       console.log('Можно отправлять');
     } else {
       console.log('Форма невалидна');

@@ -1,5 +1,5 @@
-import { sendData } from './load.js';
-import {showAlert} from './utils.js';
+import {sendData} from './load.js';
+import {showAlert, showSuccess} from './utils.js';
 
 const commentField = document.querySelector('.text__description');
 const selectImageForm = document.querySelector('#upload-select-image');
@@ -10,18 +10,14 @@ const pristine = new Pristine(commentField, {
   errorTextClass: 'text__description__error-text',
 });
 
-const setUserFormSubmit = (onSuccess) => {
-  selectImageForm.addEventListener('submit', (evt) => {
-    evt.preventDefault();
-    const isValid = pristine.validate();
-    if (isValid) {
-      sendData(
-        () => onSuccess(),
-        () => showAlert(),
-        new FormData(evt.target),
-      );
-    }
-  });
+const setUserFormSubmit = (evt) => {
+  evt.preventDefault();
+  const isValid = pristine.validate();
+  if (isValid) {
+    sendData(showSuccess, showAlert, new FormData(evt.target));
+  }
 };
+
+selectImageForm.addEventListener('submit', setUserFormSubmit);
 
 export {setUserFormSubmit, commentField};

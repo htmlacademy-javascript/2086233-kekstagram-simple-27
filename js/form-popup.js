@@ -31,12 +31,11 @@ function openEditPhoto () {
 function closeEditPhoto () {
   resetScale();
   resetEffect();
-  imgUploadOverlay.classList.add('hidden');
-  document.body.classList.remove('modal-open');
   imgUpload.value = '';
   commentField.value = '';
+  imgUploadOverlay.classList.add('hidden');
+  document.body.classList.remove('modal-open');
   submitButton.setAttribute('disabled', 'disabled');
-  commentField.value = '';
   document.removeEventListener('keydown', onPopupEscKeydown);
   uploadCancel.removeEventListener('click', () => {
     closeEditPhoto();
