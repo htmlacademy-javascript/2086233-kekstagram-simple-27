@@ -1,10 +1,12 @@
 import {isEscapeKey} from './utils.js';
 import {resetScale} from './scale-editing.js';
 import {resetEffect} from './effect-editing.js';
+import {commentField} from './comment-validation.js';
 
 const imgUpload = document.querySelector('#upload-file');
 const uploadCancel = document.querySelector('#upload-cancel');
 const imgUploadOverlay = document.querySelector('.img-upload__overlay');
+const submitButton = document.querySelector('.img-upload__submit');
 
 const onPopupEscKeydown = (evt) => {
   if (isEscapeKey(evt)) {
@@ -29,11 +31,15 @@ function openEditPhoto () {
 function closeEditPhoto () {
   resetScale();
   resetEffect();
+  imgUpload.value = '';
+  commentField.value = '';
   imgUploadOverlay.classList.add('hidden');
   document.body.classList.remove('modal-open');
-  imgUpload.value = '';
+  submitButton.setAttribute('disabled', 'disabled');
   document.removeEventListener('keydown', onPopupEscKeydown);
   uploadCancel.removeEventListener('click', () => {
     closeEditPhoto();
   });
 }
+
+export {openEditPhoto, closeEditPhoto, onPopupEscKeydown};

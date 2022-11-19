@@ -1,3 +1,6 @@
+import {sendData} from './load.js';
+import {showAlert, showSuccess} from './utils.js';
+
 const commentField = document.querySelector('.text__description');
 const selectImageForm = document.querySelector('#upload-select-image');
 
@@ -7,13 +10,14 @@ const pristine = new Pristine(commentField, {
   errorTextClass: 'text__description__error-text',
 });
 
-selectImageForm.addEventListener('submit', (evt) => {
+const setUserFormSubmit = (evt) => {
   evt.preventDefault();
-
   const isValid = pristine.validate();
   if (isValid) {
-    console.log('Можно отправлять');
-  } else {
-    console.log('Форма невалидна');
+    sendData(showSuccess, showAlert, new FormData(evt.target));
   }
-});
+};
+
+selectImageForm.addEventListener('submit', setUserFormSubmit);
+
+export {setUserFormSubmit, commentField};
