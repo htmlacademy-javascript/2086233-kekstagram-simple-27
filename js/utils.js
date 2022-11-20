@@ -30,66 +30,37 @@ function checkLength(string) {
 
 //Функции проверки клавиатуры
 const isEscapeKey = (evt) => evt.key === 'Escape';
+const body = document.querySelector('body');
 
-const showAlert = () => {
-  const alertContainer = document.querySelector('body');
-  const templateFragment = document.querySelector('#error').content;
-  const template = templateFragment.querySelector('.error');
-  const fragment = document.createDocumentFragment();
-  const errorPost = template.cloneNode(true);
-  errorPost.classList.add('error');
-  fragment.appendChild(errorPost);
-  alertContainer.appendChild(fragment);
-
-  const errorButton = document.querySelector('.error__button');
+const closeMessage = (status) => {
+  body.removeChild(document.querySelector(`.${status}`));
   const onSomeAreaClick = (evt) => {
-    if (evt.target.className !== 'error__inner') {
-      alertContainer.removeChild(fragment);
+    if (evt.target.className !== `${status}__inner`) {
+      body.removeChild(document.querySelector(`.${status}`));
       document.removeEventListener('keydown', onPopupEscKeydown);
       document.removeEventListener('click', onSomeAreaClick);
     }
   };
-  const closeAlertMessage = () => {
-    alertContainer.removeChild(fragment);
-    document.removeEventListener('keydown', onPopupEscKeydown);
-    document.removeEventListener('click', onSomeAreaClick);
-  };
-
-  errorButton.addEventListener('click', () => {
-    closeAlertMessage();
-  });
-  document.addEventListener('keydown', onPopupEscKeydown);
-  document.addEventListener('click', onSomeAreaClick);
+  document.removeEventListener('keydown', onPopupEscKeydown);
+  document.removeEventListener('click', onSomeAreaClick);
+  document.addEventListener('keydown', closeMessage);
 };
-
-const showSuccess = () => {
-  const successButton = document.querySelector('.success__button');
-  const successMessageContainer = document.querySelector('body');
-  const templateFragment = document.querySelector('#success').content;
-  const template = templateFragment.querySelector('.success');
+const showMessage = (status) => {
+  const templateFragment = document.querySelector(`#${status}`).content;
+  const template = templateFragment.querySelector(`.${status}`);
   const fragment = document.createDocumentFragment();
-  const successPost = template.cloneNode(true);
-  successPost.classList.add('success');
-  fragment.appendChild(successPost);
-  successMessageContainer.appendChild(fragment);
+  const post = template.cloneNode(true);
+  post.classList.add(`${status}`);
+  fragment.appendChild(post);
+  body.appendChild(document.querySelector(`${status}`));
 
-  const onSomeAreaClick = (evt) => {
-    if (evt.target.className !== 'success__inner') {
-      successMessageContainer.removeChild(fragment);
-      document.removeEventListener('keydown', onPopupEscKeydown);
-      document.removeEventListener('click', onSomeAreaClick);
-    }
-  };
-  const closeSuccessMessage = () => {
-    successMessageContainer.removeChild(fragment);
-    document.removeEventListener('keydown', onPopupEscKeydown);
-    document.removeEventListener('click', onSomeAreaClick);
-  };
-  successButton.addEventListener('click', () => {
-    closeSuccessMessage();
+  const button = document.querySelector(`.${status}__button`);
+  button.addEventListener('click', () => {
+    closeMessage();
   });
-  document.addEventListener('keydown', onPopupEscKeydown);
-  document.addEventListener('click', onSomeAreaClick);
 };
+
+const showAlert = () => { showMessage('error'); };
+const showSuccess = () => { showMessage('success'); };
 
 export {getRandomInteger, checkLength, isEscapeKey, showAlert, showSuccess};

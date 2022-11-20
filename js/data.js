@@ -43,9 +43,6 @@ const createPost = (index) => ({
   likes: getRandomInteger(15, 200),
   comments: getRandomInteger(0, 200),
 });
-
-console.log(createPost());
-
 const postsContent = Array.from({length: POSTS_COUNT}, (obj, index) => createPost(index + 1));
 
 export {postsContent, POSTS_COUNT};

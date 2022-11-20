@@ -23,15 +23,12 @@ const sendData = (onSuccess, onFail, body) => {
   ).then((response) => {
     if (response.ok) {
       onSuccess();
-      console.log('Можно отправлять');
     } else {
-      console.log('Форма невалидна');
       throw new Error('Данные невалидны');
     }
   })
     .catch((err) => {
       onFail(err);
-      console.error(err);
     });
 };
 
