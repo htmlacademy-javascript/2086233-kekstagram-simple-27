@@ -32,21 +32,6 @@ function checkLength(string) {
 const isEscapeKey = (evt) => evt.key === 'Escape';
 const body = document.querySelector('body');
 
-const showMessage = (status) => {
-  const templateFragment = document.querySelector(`#${status}`).content;
-  const template = templateFragment.querySelector(`.${status}`);
-  const fragment = document.createDocumentFragment();
-  const post = template.cloneNode(true);
-  post.classList.add(`${status}`);
-  fragment.appendChild(post);
-  body.appendChild(fragment);
-
-  const button = document.querySelector(`.${status}__button`);
-  button.addEventListener('click', () => {
-    closeMessage();
-  });
-};
-
 const closeMessage = (status) => {
   body.removeChild(document.querySelector(`.${status}`));
   const onSomeAreaClick = (evt) => {
@@ -61,6 +46,20 @@ const closeMessage = (status) => {
   document.addEventListener('keydown', closeMessage);
 };
 
+const showMessage = (status) => {
+  const templateFragment = document.querySelector(`#${status}`).content;
+  const template = templateFragment.querySelector(`.${status}`);
+  const fragment = document.createDocumentFragment();
+  const post = template.cloneNode(true);
+  post.classList.add(`${status}`);
+  fragment.appendChild(post);
+  body.appendChild(fragment);
+
+  const button = document.querySelector(`.${status}__button`);
+  button.addEventListener('click', () => {
+    closeMessage();
+  });
+};
 
 const showAlert = () => { showMessage('error'); };
 const showSuccess = () => { showMessage('success'); };
