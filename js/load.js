@@ -1,6 +1,6 @@
 import {POSTS_COUNT} from './data.js';
 
-const getData = (onSuccess, onError) => fetch('https://27.javascript.pages.academy/kekstagram-simple/data')
+const getData = (onSuccess) => fetch('https://27.javascript.pages.academy/kekstagram-simple/data')
   .then((response) => {
     if (response.ok) {
       return response.json();}
@@ -11,7 +11,7 @@ const getData = (onSuccess, onError) => fetch('https://27.javascript.pages.acade
 
   })
   .catch ((err) => {
-    onError(err);});
+    console.error(err);});
 
 const sendData = (onSuccess, onFail, body) => {
   fetch(
@@ -23,15 +23,12 @@ const sendData = (onSuccess, onFail, body) => {
   ).then((response) => {
     if (response.ok) {
       onSuccess();
-      console.log('Можно отправлять');
     } else {
-      console.log('Форма невалидна');
       throw new Error('Данные невалидны');
     }
   })
     .catch((err) => {
       onFail(err);
-      console.error(err);
     });
 };
 
