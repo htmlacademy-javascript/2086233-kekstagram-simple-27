@@ -1,6 +1,6 @@
 import {POSTS_COUNT} from './data.js';
 
-const getData = (onSuccess) => fetch('https://27.javascript.pages.academy/kekstagram-simple/data')
+const getData = (onSuccess, onError) => fetch('https://27.javascript.pages.academy/kekstagram-simple/data')
   .then((response) => {
     if (response.ok) {
       return response.json();}
@@ -11,7 +11,7 @@ const getData = (onSuccess) => fetch('https://27.javascript.pages.academy/keksta
 
   })
   .catch ((err) => {
-    console.error(err);});
+    onError(err);});
 
 const sendData = (onSuccess, onFail, body) => {
   fetch(
