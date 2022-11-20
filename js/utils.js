@@ -1,4 +1,4 @@
-import {onPopupEscKeydown} from './form-popup.js';
+import {closeEditPhoto, onPopupEscKeydown} from './form-popup.js';
 
 function getRandomInteger(firstNumber, secondNumber) {
   if (firstNumber < 0 || secondNumber < 0) {
@@ -34,18 +34,21 @@ const body = document.querySelector('body');
 
 const closeMessage = (status) => {
   body.removeChild(document.querySelector(`.${status}`));
-  const onSomeAreaClick = (evt) => {
-    if (evt.target.className !== `${status}__inner`) {
-      body.removeChild(document.querySelector(`.${status}`));
-      document.removeEventListener('keydown', onPopupEscKeydown);
-      document.removeEventListener('click', onSomeAreaClick);
-    }
-  };
   document.removeEventListener('keydown', onPopupEscKeydown);
-  document.removeEventListener('click', onSomeAreaClick);
   document.addEventListener('keydown', closeMessage);
+  if (status === 'success') {
+    closeEditPhoto();
+  }
 };
-
+const onSomeAreaClick = (evt, status) => {
+  if (evt.target.className !== `${status}__inner`) {
+    body.removeChild(document.querySelector(`.${status}`));
+    document.removeEventListener('keydown', onPopupEscKeydown);
+    document.removeEventListener('click', () => onSomeAreaClick());
+    if (status === 'success') {
+      closeEditPhoto();}
+  }
+};
 const showMessage = (status) => {
   const templateFragment = document.querySelector(`#${status}`).content;
   const template = templateFragment.querySelector(`.${status}`);
@@ -57,8 +60,10 @@ const showMessage = (status) => {
 
   const button = document.querySelector(`.${status}__button`);
   button.addEventListener('click', () => {
-    closeMessage();
+    closeMessage(status);
   });
+  document.addEventListener('keydown', onPopupEscKeydown);
+  document.addEventListener('click', (evt) => onSomeAreaClick(evt, status));
 };
 
 const showAlert = () => { showMessage('error'); };
