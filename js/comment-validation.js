@@ -20,4 +20,4 @@ const setUserFormSubmit = (evt) => {
 
 selectImageForm.addEventListener('submit', setUserFormSubmit);
 
-export {setUserFormSubmit, commentField};
+export {setUserFormSubmit};
