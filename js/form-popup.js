@@ -1,8 +1,8 @@
 import {isEscapeKey} from './utils.js';
 import {resetScale} from './scale-editing.js';
 import {resetEffect} from './effect-editing.js';
-import {commentField} from './comment-validation.js';
 
+const commentField = document.querySelector('.text__description');
 const imgUpload = document.querySelector('#upload-file');
 const uploadCancel = document.querySelector('#upload-cancel');
 const imgUploadOverlay = document.querySelector('.img-upload__overlay');
