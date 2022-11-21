@@ -1,5 +1,10 @@
 import {closeEditPhoto, onPopupEscKeydown} from './form-popup.js';
 
+const MIN_LENGTH = 20;
+const MAX_LENGTH = 140;
+const ERR_MSG = 'Слишком короткий комментарий!';
+const POSTS_COUNT = 25;
+
 function getRandomInteger(firstNumber, secondNumber) {
   if (firstNumber < 0 || secondNumber < 0) {
     return NaN; }
@@ -16,13 +21,10 @@ function getRandomInteger(firstNumber, secondNumber) {
 /* Функция для проверки максимальной длины строки.
 (с использованием ресурса - https://learn.javascript.ru/task/truncate)*/
 
-const MIN_LENGTH = 20;
-const MAX_LENGTH = 140;
-const errMsg = 'Слишком короткий комментарий!';
 
 function checkLength(string) {
   if (string.length < MIN_LENGTH) {
-    throw Error(errMsg);
+    throw Error(ERR_MSG);
   }
   return (string.length > MAX_LENGTH) ?
     `${string.slice(0, MAX_LENGTH - 1)}…` : string;
@@ -32,14 +34,6 @@ function checkLength(string) {
 const isEscapeKey = (evt) => evt.key === 'Escape';
 const body = document.querySelector('body');
 
-const closeMessage = (status) => {
-  body.removeChild(document.querySelector(`.${status}`));
-  document.removeEventListener('keydown', onPopupEscKeydown);
-  document.addEventListener('keydown', closeMessage);
-  if (status === 'success') {
-    closeEditPhoto();
-  }
-};
 const onSomeAreaClick = (evt, status) => {
   if (evt.target.className !== `${status}__inner`) {
     body.removeChild(document.querySelector(`.${status}`));
@@ -49,6 +43,16 @@ const onSomeAreaClick = (evt, status) => {
       closeEditPhoto();}
   }
 };
+const closeMessage = (status) => {
+  body.removeChild(document.querySelector(`.${status}`));
+  document.removeEventListener('keydown', onPopupEscKeydown);
+  document.removeEventListener('click', () => onSomeAreaClick());
+  document.removeEventListener('keydown', closeMessage);
+  if (status === 'success') {
+    closeEditPhoto();
+  }
+};
+
 const showMessage = (status) => {
   const templateFragment = document.querySelector(`#${status}`).content;
   const template = templateFragment.querySelector(`.${status}`);
@@ -69,4 +73,4 @@ const showMessage = (status) => {
 const showAlert = () => { showMessage('error'); };
 const showSuccess = () => { showMessage('success'); };
 
-export {getRandomInteger, checkLength, isEscapeKey, showAlert, showSuccess};
+export {getRandomInteger, checkLength, isEscapeKey, showAlert, showSuccess, POSTS_COUNT};

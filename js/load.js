@@ -1,4 +1,4 @@
-import {POSTS_COUNT} from './data.js';
+import {POSTS_COUNT} from './utils.js';
 
 const getData = (onSuccess, onError) => fetch('https://27.javascript.pages.academy/kekstagram-simple/data')
   .then((response) => {

@@ -11,4 +11,5 @@ getData(
 const selectImageForm = document.querySelector('#upload-select-image');
 selectImageForm.addEventListener('submit', setUserFormSubmit);
 
+
 //Импорты других модулей, Вызовы общих функций, Настройка скриптов..

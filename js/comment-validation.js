@@ -1,4 +1,3 @@
-
 import {sendData} from './load.js';
 import {showAlert, showSuccess} from './utils.js';
 
