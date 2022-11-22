@@ -3,6 +3,7 @@ import './effect-editing.js';
 import {getData} from './load.js';
 import {generatePhotos} from './photos-generation.js';
 import {setUserFormSubmit} from './comment-validation.js';
+import './photo-load.js';
 
 getData(
   (photos) => generatePhotos(photos), // при успехе генерируем изображения

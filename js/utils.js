@@ -21,7 +21,6 @@ function getRandomInteger(firstNumber, secondNumber) {
 /* Функция для проверки максимальной длины строки.
 (с использованием ресурса - https://learn.javascript.ru/task/truncate)*/
 
-
 function checkLength(string) {
   if (string.length < MIN_LENGTH) {
     throw Error(ERR_MSG);
@@ -32,26 +31,8 @@ function checkLength(string) {
 
 //Функции проверки клавиатуры
 const isEscapeKey = (evt) => evt.key === 'Escape';
+//Функции всплывающего сообщения
 const body = document.querySelector('body');
-
-const onSomeAreaClick = (evt, status) => {
-  if (evt.target.className !== `${status}__inner`) {
-    body.removeChild(document.querySelector(`.${status}`));
-    document.removeEventListener('keydown', onPopupEscKeydown);
-    document.removeEventListener('click', () => onSomeAreaClick());
-    if (status === 'success') {
-      closeEditPhoto();}
-  }
-};
-const closeMessage = (status) => {
-  body.removeChild(document.querySelector(`.${status}`));
-  document.removeEventListener('keydown', onPopupEscKeydown);
-  document.removeEventListener('click', () => onSomeAreaClick());
-  document.removeEventListener('keydown', closeMessage);
-  if (status === 'success') {
-    closeEditPhoto();
-  }
-};
 
 const showMessage = (status) => {
   const templateFragment = document.querySelector(`#${status}`).content;
@@ -63,12 +44,31 @@ const showMessage = (status) => {
   body.appendChild(fragment);
 
   const button = document.querySelector(`.${status}__button`);
+
+  const onSomeAreaClick = (evt) => {
+    //объявляю функцию внутри, чтобы потом можно было ее удалить и можно было иметь доступ к status
+    if (!evt.target.closest(`.${status}__inner`)) {
+      //чтобы функция сработала вне зоны плашки сообщения
+      closeMessage(status);
+      document.removeEventListener('click', onSomeAreaClick);
+    }
+  };
   button.addEventListener('click', () => {
     closeMessage(status);
+    document.removeEventListener('click', onSomeAreaClick);
   });
   document.addEventListener('keydown', onPopupEscKeydown);
-  document.addEventListener('click', (evt) => onSomeAreaClick(evt, status));
+  document.addEventListener('click', onSomeAreaClick);
 };
+
+function closeMessage(status) {
+  body.removeChild(document.querySelector(`.${status}`));
+  document.removeEventListener('keydown', onPopupEscKeydown);
+  document.removeEventListener('click', closeMessage);
+  if (status === 'success') {
+    closeEditPhoto();
+  }
+}
 
 const showAlert = () => { showMessage('error'); };
 const showSuccess = () => { showMessage('success'); };
